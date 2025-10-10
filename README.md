@@ -15,7 +15,6 @@
   - Label: Not On Label (Artist Self-released)
   - Catalog Number: none
   - Format: File
-  - Genre / Style: none
 - CSV is automatically named: Artist - Album (Year).csv and saved to your Desktop
 
 ## Installation
