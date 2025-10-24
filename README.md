@@ -4,6 +4,7 @@
 - Reads metadata tags using Mutagen
 - Handles multi-artist tracks
 - Supports multiple folders
+- Supports cover images
 
 ## Features
 
@@ -11,6 +12,11 @@
 - Reads metadata tags: Artist, Album, Album Artist, Track Title, Genre, Style, Label, Catalog Number, Year
 - Handles multi-artist tracks: extra artists are clearly shown with an em dash (—) before the track title
 - Supports multiple folders dragged onto the script
+- Supports cover images:
+  - Extracts embedded artwork if available, or falls back to `cover.jpg/png`
+  - Resizes image to 600×600 before uploading
+  - Uploads image to Litterbox (24h expiration)
+  - If no image found or upload fails `ImageUploadFailed` is written in CSV
 - Defaults for missing metadata:
   - Label: Not On Label (Artist Self-released)
   - Catalog Number: none
@@ -20,8 +26,9 @@
 ## Installation
 
 1. Install Python 3
-2. Install Mutagen for metadata parsing:
+2. Install required packages:
    pip install mutagen
+   pip install pillow requests
 
 ## Usage
 
