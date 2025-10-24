@@ -16,7 +16,6 @@
   - Extracts embedded artwork if available, or falls back to cover.jpg/png
   - Resizes image to 600×600 before uploading
   - Uploads image to Litterbox (24h expiration)
-  - If no image found or upload fails ImageUploadFailed is written in CSV
 - Defaults for missing metadata:
   - Label: Not On Label (Artist Self-released)
   - Catalog Number: none
