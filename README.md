@@ -14,8 +14,7 @@
 - Supports multiple folders dragged onto the script
 - Supports cover images:
   - Extracts embedded artwork if available, or falls back to cover.jpg/png
-  - Resizes image to 600×600 before uploading
-  - Uploads image to Litterbox (24h expiration)
+  - Resizes image to 600×600 and uploads to Litterbox
 - Defaults for missing metadata:
   - Label: Not On Label (Artist Self-released)
   - Catalog Number: none
