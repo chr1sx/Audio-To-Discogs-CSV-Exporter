@@ -13,10 +13,10 @@
 - Handles multi-artist tracks: extra artists are clearly shown with an em dash (—) before the track title
 - Supports multiple folders dragged onto the script
 - Supports cover images:
-  - Extracts embedded artwork if available, or falls back to `cover.jpg/png`
+  - Extracts embedded artwork if available, or falls back to cover.jpg/png
   - Resizes image to 600×600 before uploading
   - Uploads image to Litterbox (24h expiration)
-  - If no image found or upload fails `ImageUploadFailed` is written in CSV
+  - If no image found or upload fails ImageUploadFailed is written in CSV
 - Defaults for missing metadata:
   - Label: Not On Label (Artist Self-released)
   - Catalog Number: none
@@ -26,9 +26,7 @@
 ## Installation
 
 1. Install Python 3
-2. Install required packages:
-   pip install mutagen
-   pip install pillow requests
+2. Install required packages: `pip install mutagen` `pip install pillow requests`
 
 ## Usage
 
