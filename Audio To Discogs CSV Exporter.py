@@ -28,7 +28,7 @@ def resize_image(image_bytes, size=(600, 600)):
             img = img.convert("RGB")
             img.thumbnail(size, Image.LANCZOS)
             output = BytesIO()
-            img.save(output, format="JPEG", quality=90)
+            img.save(output, format="JPEG", quality=90, subsampling=0)
             return output.getvalue()
     except Exception as e:
         print(f"Image resize failed: {e}")
