@@ -1,10 +1,12 @@
+<div align="center">
+
 # Audio To Discogs CSV Exporter
 
-- Supports common audio formats
-- Reads metadata tags using Mutagen
-- Handles multi-artist tracks
-- Supports multiple folders
-- Supports cover images
+[![Download Script](https://img.shields.io/badge/Download%20Script-blue?style=for-the-badge)](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip)
+
+</div>
+
+---
 
 ## Features
 
@@ -21,14 +23,22 @@
   - Format: File
 - CSV is automatically named: Artist - Album (Year).csv and saved to your Desktop
 
+---
+
 ## Installation
 
-1. Install Python 3
+1. Install Python 3.
 2. Install required packages: `pip install mutagen` `pip install pillow requests`
+
+---
 
 ## Usage
 
-1. [Download the script](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip)
-2. Drag and drop one or more music folders onto the script file
-3. CSV files will appear on your Desktop, ready to use
-4. [Upload your CSV files on Discogs](https://www.discogs.com/release/csv_to_draft)
+1. [Download the script](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip).
+2. Drag and drop one or more music folders onto the script file.
+3. CSV files will appear on your Desktop, ready to use.
+4. [Upload your CSV files on Discogs](https://www.discogs.com/release/csv_to_draft).
+5. **Optional** - Use this in combination with [**Discogs Durations Helper**](https://github.com/chr1sx/Discogs-Durations-Helper),  
+since Discogs CSV files don’t include a durations field by default.
+
+---
