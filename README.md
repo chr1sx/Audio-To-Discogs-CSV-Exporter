@@ -4,6 +4,8 @@
 
 [![Download Script](https://img.shields.io/badge/Download%20Script-blue?style=for-the-badge)](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip)
 
+*A Python script that creates CSVs from your music folders, reading tags from multiple audio formats.*
+
 </div>
 
 ---
