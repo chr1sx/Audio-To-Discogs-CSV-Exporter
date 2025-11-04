@@ -150,7 +150,7 @@ def process_folder(folder, desktop):
             if audio.info and audio.info.length:
                 minutes = int(audio.info.length // 60)
                 seconds = int(audio.info.length % 60)
-                length_str = f"{minutes}:{seconds:02d}"
+                length_str = f" {minutes}:{seconds:02d}"
 
             track_artist_clean = artist_str.strip()
             album_artist_clean = album_artist.strip()
