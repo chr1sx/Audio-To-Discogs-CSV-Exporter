@@ -37,7 +37,7 @@ reading tags from multiple audio formats.*
 ## Installation
 
 1. Install Python 3.
-2. Install required packages: `pip install mutagen` `pip install pillow requests`
+2. Install required packages: `pip install mutagen pillow requests`
 
 ---
 
