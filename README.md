@@ -48,6 +48,6 @@ reading tags from multiple audio formats.*
 3. CSV files will appear on your Desktop, ready to use.
 4. [Upload your CSV files on Discogs](https://www.discogs.com/release/csv_to_draft).
 5. **Optional** - Use this in combination with [**Discogs Durations And Artists Helper**](https://github.com/chr1sx/Discogs-Durations-And-Artists-Helper/),  
-since Discogs CSV files don’t include a durations and artists (VA) field by default.
+since Discogs CSV files don’t include duration or artist (VA) fields by default.
 
 ---
