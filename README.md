@@ -47,7 +47,7 @@ reading tags from multiple audio formats.*
 2. Drag and drop one or more music folders onto the script file.
 3. CSV files will appear on your Desktop, ready to use.
 4. [Upload your CSV files on Discogs](https://www.discogs.com/release/csv_to_draft).
-5. **Optional** - Use this in combination with [**Discogs Durations Helper**](https://github.com/chr1sx/Discogs-Durations-Helper),  
-since Discogs CSV files don’t include a durations field by default.
+5. **Optional** - Use this in combination with [**Discogs Durations And Artists Helper**](https://github.com/chr1sx/Discogs-Durations-And-Artists-Helper/),  
+since Discogs CSV files don’t include a durations and artists (VA) field by default.
 
 ---
