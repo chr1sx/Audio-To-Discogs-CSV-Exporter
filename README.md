@@ -2,7 +2,8 @@
 
 # Audio To Discogs CSV Exporter
 
-[![Download Script](https://img.shields.io/badge/Download%20Script-blue?style=for-the-badge)](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip)
+[![Download Script](https://img.shields.io/badge/Download%20Script-brightgreen?style=for-the-badge)](https://github.com/chr1sx/Audio-To-Discogs-CSV-Exporter/archive/refs/heads/main.zip)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
 *A Python script that creates CSVs from your music folders,   
 reading tags from multiple audio formats.*
