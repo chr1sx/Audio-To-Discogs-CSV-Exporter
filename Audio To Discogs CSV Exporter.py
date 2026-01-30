@@ -83,7 +83,7 @@ def process_folder(folder):
         "albums": set(),
         "label": None,
         "catno": "none",
-        "format": "File",
+        "format": None,
         "genre": set(),
         "style": set(),
         "tracks": [],
@@ -134,6 +134,7 @@ def process_folder(folder):
             label = get_tag(tags, "label", default=f"Not On Label ({album_artist} Self-released)")[0]
             catno = get_tag(tags, "catalog", "catno", "cat#", default="none")[0]
             date = get_tag(tags, "date", "year", default="Unknown")[0]
+            format_tag = get_tag(tags, "format", default="File")[0]
 
             if folder_data["artist"] is None:
                 folder_data["artist"] = album_artist
@@ -141,6 +142,8 @@ def process_folder(folder):
                 folder_data["label"] = label
             if folder_data["date"] is None:
                 folder_data["date"] = date
+            if folder_data["format"] is None:
+                folder_data["format"] = format_tag
 
             folder_data["albums"].add(album)
             folder_data["genre"].add(genre)
@@ -164,6 +167,9 @@ def process_folder(folder):
                 track_entry = f"{track_artist_clean} — {title}{length_str}"
 
             folder_data["tracks"].append(track_entry)
+
+    if folder_data["format"] is None:
+        folder_data["format"] = "File"
 
     combined_album = " / ".join(folder_data["albums"])
     combined_genre = ", ".join(sorted(folder_data["genre"]))
