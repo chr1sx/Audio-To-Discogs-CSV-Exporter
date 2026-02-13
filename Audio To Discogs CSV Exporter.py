@@ -86,7 +86,8 @@ def process_folder(folder):
         "format": None,
         "genre": set(),
         "style": set(),
-        "tracks": [],
+        "track_list": [],
+        "has_album_artist_tag": False,
         "date": None,
         "images": "ImageUploadFailed"
     }
@@ -105,7 +106,6 @@ def process_folder(folder):
                 continue
 
             if not artwork_uploaded:
-                # 1️⃣ Try embedded artwork
                 try:
                     full_audio = MutagenFile(path)
                     img_data = extract_embedded_artwork(full_audio)
@@ -115,7 +115,6 @@ def process_folder(folder):
                 except Exception:
                     pass
 
-                # 2️⃣ If no embedded art, try external image file
                 if not artwork_uploaded:
                     ext_img_path = find_external_image(root)
                     if ext_img_path:
@@ -127,7 +126,13 @@ def process_folder(folder):
             artist_list = get_tag(tags, "artist", default="Unknown Artist")
             artist_str = ";".join(artist_list)
             album = get_tag(tags, "album", default=os.path.splitext(file)[0])[0]
-            album_artist = get_tag(tags, "albumartist", "album artist", default=artist_str)[0]
+            
+            if "albumartist" in tags or "album artist" in tags:
+                album_artist = get_tag(tags, "albumartist", "album artist")[0]
+                folder_data["has_album_artist_tag"] = True
+            else:
+                album_artist = artist_str
+            
             title = get_tag(tags, "title", default=os.path.splitext(file)[0])[0]
             genre = get_tag(tags, "genre", default="none")[0]
             style = get_tag(tags, "style", "styles", default="none")[0]
@@ -153,23 +158,32 @@ def process_folder(folder):
             if audio.info and audio.info.length:
                 minutes = int(audio.info.length // 60)
                 seconds = int(audio.info.length % 60)
-                length_str = f" {minutes}:{seconds:02d}"
+                length_str = f"{minutes}:{seconds:02d}"
 
             track_artist_clean = artist_str.strip()
-            album_artist_clean = album_artist.strip()
-
-            if track_artist_clean == album_artist_clean:
-                track_entry = f"{title}{length_str}"
-            elif album_artist_clean in track_artist_clean:
-                extras = track_artist_clean.replace(album_artist_clean, "").strip(" ;,")
-                track_entry = f"{extras} — {title}{length_str}" if extras else f"{title}{length_str}"
-            else:
-                track_entry = f"{track_artist_clean} — {title}{length_str}"
-
-            folder_data["tracks"].append(track_entry)
+            folder_data["track_list"].append((track_artist_clean, title, length_str))
 
     if folder_data["format"] is None:
         folder_data["format"] = "File"
+
+    if not folder_data["has_album_artist_tag"] and folder_data["track_list"]:
+        unique_artists = set(artist for artist, _, _ in folder_data["track_list"])
+        if len(unique_artists) > 1:
+            folder_data["artist"] = "Various"
+
+    tracks_list = []
+    for track_artist, title, length in folder_data["track_list"]:
+        if folder_data["artist"] == "Various":
+            track_entry = f"{track_artist} — {title}"
+        elif track_artist == folder_data["artist"]:
+            track_entry = title
+        else:
+            track_entry = f"{track_artist} — {title}"
+        
+        if length:
+            track_entry += f" {length}"
+        
+        tracks_list.append(track_entry)
 
     combined_album = " / ".join(folder_data["albums"])
     combined_genre = ", ".join(sorted(folder_data["genre"]))
@@ -183,7 +197,7 @@ def process_folder(folder):
         "format": folder_data["format"],
         "genre": combined_genre,
         "style": combined_style,
-        "tracks": "\n".join(folder_data["tracks"]),
+        "tracks": "\n".join(tracks_list),
         "date": folder_data["date"],
         "images": folder_data["images"]
     }
@@ -241,16 +255,13 @@ def save_combined_csv(all_folder_data, desktop):
     print(f"Combined CSV saved: {filepath}")
 
 def find_album_folders(root_folder):
-    """Find all folders that contain audio files (album folders)"""
     album_folders = []
     
     for dirpath, dirnames, filenames in os.walk(root_folder):
-        # Check if current folder has audio files
         has_audio = any(os.path.splitext(f)[1].lower() in AUDIO_EXTENSIONS for f in filenames)
         
         if has_audio:
             album_folders.append(dirpath)
-            # Don't traverse into subfolders of album folders
             dirnames.clear()
     
     return album_folders
@@ -263,24 +274,20 @@ def main():
     desktop = str(Path.home() / "Desktop")
     folders = sys.argv[1:]
     
-    # Find all album folders (folders containing audio files)
     all_album_folders = []
     for folder in folders:
         album_folders = find_album_folders(folder)
         if album_folders:
             all_album_folders.extend(album_folders)
         else:
-            # No audio found, but add the folder anyway
             all_album_folders.append(folder)
 
-    # If only one album folder, just process it
     if len(all_album_folders) == 1:
         print(f"Processing folder: {all_album_folders[0]}")
         folder_data = process_folder(all_album_folders[0])
         save_individual_csv(folder_data, desktop)
         return
 
-    # Multiple folders - offer choice
     print(f"\nFound {len(all_album_folders)} folders to process\n")
     
     while True:
